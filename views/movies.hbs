@@ -1,0 +1,20 @@
+<div>
+  <h2>List of Movies</h2>
+
+  {{#each movies}}
+    <a href="/movies/{{this.id}}">
+      <div class='module module-movie' style='background-image: url({{this.image}})'>
+        <div class='movie-info'>
+          <h3 class='movie-title'>
+            {{this.title}}
+          </h3>
+          <p class='movie-plot'>
+            {{plot}}
+          </p>
+        </div>
+      </div>
+    </a>
+  {{/each}}
+</div>
+
+<link rel="stylesheet" type="text/css" href="/css/movies.css">

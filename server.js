@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const path = require('path');
 
 const router = require('./router/route.js');
 
@@ -11,6 +12,9 @@ var port = process.env.PORT || 80;
 // Enable retrieving data from POST
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+// Enable public ressources
+app.use(express.static(path.join(__dirname, '/public')));
 
 // Set the view engine to handlebars
 app.set("view engine", "hbs");
