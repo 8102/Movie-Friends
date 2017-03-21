@@ -1,0 +1,28 @@
+{
+  "name": "movie-friends",
+  "version": "1.0.0",
+  "description": "Application for Development of Server-side Solutions course",
+  "main": "server.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/8102/Movie-Friends.git"
+  },
+  "keywords": [
+    "REST",
+    "API"
+  ],
+  "author": "Hugo Prenat",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/8102/Movie-Friends/issues"
+  },
+  "homepage": "https://github.com/8102/Movie-Friends",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "hbs": "^4.0.1"
+  }
+}
