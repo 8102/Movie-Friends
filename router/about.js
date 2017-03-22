@@ -1,3 +1,3 @@
-module.exports = function login (req, res) {
+module.exports = function about (req, res) {
   res.render('about.hbs');
 };

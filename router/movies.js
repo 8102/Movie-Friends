@@ -1,8 +1,26 @@
-module.exports = function login (req, res) {
-  var movies = [
-    {id: 0, releaseYear: 2012, title: "Pulp Faction", plot: "Two faction. One answer.", image: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/movie-endersgame.jpg"},
-    {id: 1, releaseYear: 2010, title: "The Moped", plot: "The story of a moped.", image: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/movie-endersgame.jpg"},
-    {id: 2, releaseYear: 2011, title: "Top Gum", plot: "One man who's cheewing.", image: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/movie-endersgame.jpg"}
-  ];
+const sqlite3 = require('sqlite3');
+
+
+module.exports = function movies (req, res) {
+  var db = new sqlite3.Database('movie-friends.db');
+  var movies = [];
+
+  console.log(db);
+
+  db.each("SELECT id, title, releaseYear, plot, image FROM movies", function(err, row) {
+    if (!err) {
+      movies.push({
+        id: row.id,
+        title: row.title,
+        releaseYear: row.releaseYear,
+        plot: row.plot,
+        image: row.image
+      });
+    }
+    else {
+      console.log(err);
+    }
+  });
+
   res.render('movies.hbs', { movies: movies });
 };
