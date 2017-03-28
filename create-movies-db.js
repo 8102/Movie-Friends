@@ -10,7 +10,8 @@ db.serialize(function() {
     {id: 2, releaseYear: 2011, title: "Top Gum", plot: "One man who's cheewing.", image: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/movie-endersgame.jpg"}
   ];
 
-  db.run("CREATE TABLE if not exists movies (id INT, releaseYear INT, title TEXT, plot TEXT, image TEXT)");
+  db.run("CREATE TABLE if not exists movies (id INTEGER PRIMARY KEY, releaseYear INT, title TEXT, plot TEXT, image TEXT)");
+  db.run("CREATE TABLE if not exists ratings (movieId INT, rating INT)");
   var stmt = db.prepare("INSERT INTO movies VALUES (?,?,?,?,?)");
   for (var i = 0; i < movies.length; i++) {
     stmt.run(movies[i].id, movies[i].releaseYear, movies[i].title, movies[i].plot, movies[i].image);
