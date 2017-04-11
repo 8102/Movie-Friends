@@ -20,15 +20,28 @@ router.get('/movies/:id', require('./movie'));
 // handling movie rating page.
 router.get('/rate', require('./rate'));
 
-// handling unknown route and ouput an error message.
-router.get('*', require('./error'));
+// handling movie rating page.
+router.post('/addMovie', require('./addMovie'));
+
+// handling login page.
+router.get('/login', require('./login'));
+
+// handling token page.
+router.post('/token', require('./token'));
+
+// handling registration page.
+router.get('/register', require('./register'));
+
+// handling registration method page.
+router.post('/registration', require('./registration'));
 
 
 // REST API
 
-// handling movie rating page.
-router.post('/addMovie', require('./addMovie'));
 
+
+// handling unknown route and ouput an error message.
+router.get('*', require('./error'));
 
 // Export the router.
 module.exports = router;

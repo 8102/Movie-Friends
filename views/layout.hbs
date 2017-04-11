@@ -12,17 +12,25 @@
         <li>
           <a class="navlink" href="/">Home</a>
         </li>
+
+        {{#if session.authenticated}}
+
         <li>
           <a class="navlink" href="/movies">Movies</a>
         </li>
         <li>
           <a class="navlink" href="/rate">Rate</a>
         </li>
-        <li>
-          <a class="navlink" href="/about">About</a>
-        </li>
+
+        {{else}}
+
         <li>
           <a class="navlink" href="/login">Login</a>
+        </li>
+
+        {{/if}}
+        <li>
+          <a class="navlink" href="/about">About</a>
         </li>
       </ul>
     </nav>

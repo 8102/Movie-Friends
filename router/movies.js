@@ -3,7 +3,11 @@ const Database = require("./Database");
 var database = new Database('movie-friends.db');
 
 module.exports = function movies (req, res) {
-  var movies = database.getMovies();
+  database.getMovies(function (movies) {
+    res.render('movies.hbs', {
+      movies: movies,
+      session: req.session
+    });
+  });
 
-  res.render('movies.hbs', { movies: movies });
 };

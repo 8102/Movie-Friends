@@ -1,14 +1,23 @@
 require('dotenv').config();
 const express = require('express');
+const session = require('express-session');
 const bodyParser = require('body-parser');
 const path = require('path');
 
 const router = require('./router/route.js');
 
-const app = express();
+var app = express();
 
 // Port dedicated to backend server
 var port = process.env.PORT || 80;
+
+// Enable the session and set the secret token
+app.use(session({
+  secret: '[u48a%.p7H)KJnaYX*',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false }
+}));
 
 // Enable retrieving data from POST
 app.use(bodyParser.urlencoded({ extended: true }));

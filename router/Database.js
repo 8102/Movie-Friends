@@ -24,27 +24,18 @@ Database.prototype.addRating = function(movieId, rating) {
   });
 };
 
-Database.prototype.getMovies = function() {
+Database.prototype.getMovies = function(callback) {
   console.log("get all movies from database");
-  var movies = [];
   var db = this.db;
 
-  db.each("SELECT id, title, releaseYear, plot, image FROM movies", function(err, row) {
+  db.all("SELECT id, title, releaseYear, plot, image FROM movies", function(err, row) {
     if (!err) {
-      movies.push({
-        id: row.id,
-        title: row.title,
-        releaseYear: row.releaseYear,
-        plot: row.plot,
-        image: row.image
-      });
+      callback(row);
     }
     else {
       console.log(err);
     }
   });
-
-  return movies;
 };
 
 Database.prototype.getMovie = function(id, callback) {
@@ -59,7 +50,7 @@ Database.prototype.getMovie = function(id, callback) {
   var db = this.db;
 
   db.each("SELECT id, title, releaseYear, plot, image FROM movies " +
-    "WHERE movies.id = " + id, function(err, row) {
+    "WHERE movies.id = (?)", id, function(err, row) {
       if (!err) {
         movie.id = row.id;
         movie.title = row.title;
@@ -87,7 +78,7 @@ Database.prototype.getMovieFromTitle = function(title, callback) {
   var db = this.db;
 
   db.each("SELECT id, title, releaseYear, plot, image FROM movies " +
-    "WHERE movies.title = \'" + title + "\'", function(err, row) {
+    "WHERE movies.title = (?)", title, function(err, row) {
       if (!err) {
         movie.id = row.id;
         movie.title = row.title;
@@ -99,6 +90,33 @@ Database.prototype.getMovieFromTitle = function(title, callback) {
         console.log(err);
       }
       callback(movie);
+    });
+
+};
+
+Database.prototype.addUser = function(username, password) {
+  console.log("insert user into database");
+  var db = this.db;
+  db.serialize(function() {
+    var stmt = db.prepare("INSERT INTO users VALUES (NULL,?,?)");
+    stmt.run(username, password);
+    stmt.finalize();
+  });
+};
+
+Database.prototype.getUser = function(username, callback) {
+  console.log("get user with username: " + username + " from database");
+  var db = this.db;
+
+  db.all("SELECT username, password FROM users WHERE users.username = (?)",
+   username,
+   function(err, row) {
+      if (err) {
+        console.log(err);
+      }
+      else {
+        callback(row);
+      }
     });
 
 };
