@@ -10,13 +10,18 @@ module.exports = function token (req, res) {
   }
 
   database.getUser(req.body.username, function (user) {
-    if (user[0] === undefined) {
+    if (user === undefined) {
       res.redirect('/login');
-    } else {
-      if (req.body.password === user[0].password) {
+    }
+    else {
+      if (req.body.password === user.password) {
         req.session.authenticated = true;
+        req.session.userId = user.id;
         name = user.username;
         res.redirect('/movies');
+      }
+      else {
+        res.redirect('/login');
       }
     }
   });

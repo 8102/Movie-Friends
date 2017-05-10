@@ -14,9 +14,10 @@ module.exports = function registration (req, res) {
   }
 
   database.getUser(req.body.username, function (user) {
-    if (user[0] === undefined) {
+    if (user === undefined) {
       database.addUser(req.body.username, req.body.password);
       req.session.authenticated = true;
+      req.session.userId = user.id;
       name = user.username;
       res.redirect('/movies');
     } else {
