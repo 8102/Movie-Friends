@@ -1,0 +1,15 @@
+<section id="users">
+  <h2>List of Users</h2>
+
+  {{#each users}}
+    <a href="/users/{{this.id}}">
+      <div>
+        <h3>
+          {{this.username}}
+        </h3>
+      </div>
+    </a>
+  {{/each}}
+</section>
+
+<link rel="stylesheet" type="text/css" href="/css/users.css">

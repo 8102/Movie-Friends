@@ -1,0 +1,24 @@
+<section>
+  <div>
+    <h3>
+      Username:
+    </h3>
+    <p >
+      {{user.username}}
+    </p>
+    {{#each ratings}}
+      <a href="/movies/{{this.movieId}}">
+        <div>
+          <h3>
+            {{this.title}}
+          </h3>
+          <h3>
+            Rated: {{this.rating}}
+          </h3>
+        </div>
+      </a>
+    {{/each}}
+  </div>
+</section>
+
+<link rel="stylesheet" type="text/css" href="/css/user.css">

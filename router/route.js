@@ -35,6 +35,11 @@ router.get('/register', require('./register'));
 // handling registration method page.
 router.post('/registration', require('./registration'));
 
+// handling users page.
+router.get('/users', require('./users'));
+
+// handling single user page.
+router.get('/users/:id', require('./user'));
 
 // REST API
 

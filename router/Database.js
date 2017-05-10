@@ -126,4 +126,51 @@ Database.prototype.getUser = function(username, callback) {
 
 };
 
+Database.prototype.getUsers = function(callback) {
+  console.log("get all users from database");
+  var db = this.db;
+
+  db.all("SELECT username, id FROM users", function(err, row) {
+    if (!err) {
+      callback(row);
+    }
+    else {
+      console.log(err);
+    }
+  });
+};
+
+Database.prototype.getUserById = function(id, callback) {
+  console.log("get user with id: " + id + " from database");
+  var db = this.db;
+
+  db.get("SELECT username FROM users WHERE users.id = (?)",
+   id,
+   function(err, row) {
+      if (err) {
+        console.log(err);
+      }
+      else {
+        callback(row);
+      }
+    });
+
+};
+
+Database.prototype.getRatingsFromUserId = function(userId, callback) {
+  console.log("get Ratings for userId: " + userId + " from database");
+  var db = this.db;
+
+  db.all("SELECT title, releaseYear, rating, movieId FROM ratings, movies WHERE ratings.movieId = movies.id AND ratings.userId = (?)",
+   userId,
+   function(err, row) {
+     if (!err) {
+       callback(row);
+     }
+     else {
+       console.log(err);
+     }
+   });
+};
+
 module.exports = Database;
