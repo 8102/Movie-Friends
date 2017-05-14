@@ -41,6 +41,9 @@ router.get('/users', require('./users'));
 // handling single user page.
 router.get('/users/:id', require('./user'));
 
+// handling movie rating page.
+router.post('/delMovie', require('./delMovie'));
+
 // REST API
 
 

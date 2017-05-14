@@ -30,7 +30,7 @@ module.exports = function addMovie (req, res) {
             console.log("trying to add rating");
             if (movie) {
               console.log("adding rating");
-              database.addRating(movie.id, rating);
+              database.addRating(movie.id, rating, userId);
               res.redirect(303, '/movies');
             }
           });

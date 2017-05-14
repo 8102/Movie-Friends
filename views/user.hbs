@@ -6,18 +6,42 @@
     <p >
       {{user.username}}
     </p>
-    {{#each ratings}}
-      <a href="/movies/{{this.movieId}}">
-        <div>
-          <h3>
-            {{this.title}}
-          </h3>
-          <h3>
-            Rated: {{this.rating}}
-          </h3>
-        </div>
-      </a>
-    {{/each}}
+    <h3>
+      Movies
+    </h3>
+    <table id="table" class="table table-hover table-mc-light-blue">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Title</th>
+          <th>Rated</th>
+          <th>Link</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each ratings}}
+          <tr>
+            <td data-title="ID">{{this.movieId}}</td>
+            <td data-title="Title">{{this.title}}</td>
+            <td data-title="Title">{{this.rating}}</td>
+            <td data-title="Link">
+              <a href="/movies/{{this.movieId}}">link</a>
+            </td>
+            <td data-title="Delete">
+              {{#if ../same}}
+                <form action="/delMovie" method="POST">
+                  <input type="text" name="id" style="display: none;" value="{{this.movieId}}"/>
+                  <button class="button" type="submit">
+                    REMOVE
+                  </button>
+                </form>
+              {{/if}}
+            </td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
   </div>
 </section>
 

@@ -173,4 +173,32 @@ Database.prototype.getRatingsFromUserId = function(userId, callback) {
    });
 };
 
+Database.prototype.deleteRating = function(movieId, userId, callback) {
+  console.log("delete a Rating");
+  var db = this.db;
+
+  db.serialize(function() {
+    db.run("DELETE FROM ratings WHERE movieId = (?) AND userId = (?)", movieId, userId, function (err) {
+      if (err) {
+        console.log(err);
+      }
+      callback();
+    });
+  });
+};
+
+Database.prototype.deleteMovie = function(movieId, callback) {
+  console.log("delete a Movie");
+  var db = this.db;
+
+  db.serialize(function() {
+    db.run("DELETE FROM movies WHERE id = (?)", movieId, function (err) {
+      if (err) {
+        console.log(err);
+      }
+      callback();
+    });
+  });
+};
+
 module.exports = Database;
