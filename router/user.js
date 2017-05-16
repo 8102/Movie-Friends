@@ -16,12 +16,19 @@ module.exports = function user (req, res) {
           console.log(req.session.userId);
           same = true;
         }
-        res.render('user.hbs', {
-          test: 0,
-          user: user,
-          ratings: ratings,
-          same: same,
-          session: req.session
+        database.getRoleById(req.session.userId, function (role) {
+          console.log(role);
+          if (role.role == 2)
+          {
+            same = true;
+          }
+          res.render('user.hbs', {
+            test: 0,
+            user: user,
+            ratings: ratings,
+            same: same,
+            session: req.session
+          });
         });
       });
     }

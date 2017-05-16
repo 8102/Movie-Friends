@@ -173,6 +173,22 @@ Database.prototype.getRatingsFromUserId = function(userId, callback) {
    });
 };
 
+Database.prototype.getRoleById = function(userId, callback) {
+  console.log("get role for user with id: " + userId + " from database");
+  var db = this.db;
+
+  db.get("SELECT role, userId FROM roles WHERE userId = (?)",
+    userId,
+    function(err, row) {
+      if (err) {
+        console.log(err);
+      }
+      else {
+        callback(row);
+      }
+    });
+};
+
 Database.prototype.deleteRating = function(movieId, userId, callback) {
   console.log("delete a Rating");
   var db = this.db;
