@@ -8,6 +8,7 @@ module.exports = function user (req, res) {
   }
 
   var same = false;
+  var gender = 1;
 
   database.getUserById(req.params.id, function (user) {
     if (user) {
@@ -21,6 +22,9 @@ module.exports = function user (req, res) {
           if (role.role == 2)
           {
             same = true;
+          }
+          if (user.gender == 'F') {
+            gender = 0;
           }
           res.render('user.hbs', {
             user: user,

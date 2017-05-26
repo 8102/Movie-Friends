@@ -1,11 +1,37 @@
 <section>
   <div>
-    <h3>
-      Username:
-    </h3>
-    <p >
-      {{user.username}}
-    </p>
+    <div>
+      <h3>
+        Username:
+      </h3>
+      <p >
+        {{user.username}}
+      </p>
+      {{#if user.canSee}}
+        <h3>
+          First Name:
+        </h3>
+        <p >
+          {{user.firstName}}
+        </p>
+        <h3>
+          Last Name:
+        </h3>
+        <p >
+          {{user.lastName}}
+        </p>
+        <h3>
+          Gender:
+        </h3>
+        <p >
+          {{#if user.male}}
+            Mister
+          {{else}}
+            Miss
+          {{/if}}
+        </p>
+      {{/if}}
+    </div>
     <h3>
       Movies
     </h3>
@@ -31,7 +57,7 @@
             <td data-title="Delete">
               {{#if ../same}}
                 <form action="/delMovie" method="POST">
-                  <input type="text" name="id" style="display: none;" value="{{this.movieId}}"/>
+                  <input type="hidden" name="id" value="{{this.movieId}}"/>
                   <button class="button" type="submit">
                     REMOVE
                   </button>
