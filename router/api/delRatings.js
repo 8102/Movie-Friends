@@ -38,7 +38,7 @@ module.exports = function delRatings (req, res) {
                   database.deleteRating(movieId, userId, function () {
                     database.getRatingsFromId(movieId, function (ratings) {
                       console.log(ratings);
-                      if (!ratings) {
+                      if (ratings.length === 0) {
                         database.deleteMovie(movieId, function () {
                           res.status(204).json();
                         });

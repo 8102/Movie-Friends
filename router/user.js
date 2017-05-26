@@ -23,7 +23,6 @@ module.exports = function user (req, res) {
             same = true;
           }
           res.render('user.hbs', {
-            test: 0,
             user: user,
             ratings: ratings,
             same: same,
