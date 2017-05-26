@@ -1,36 +1,36 @@
 <section>
-  <div class="movie-picture" style="background-image: url({{movie.image}});"></div>
-  <div>
-    <h3 class='movie-title'>
+  <div vocab="http://schema.org/" typeof="Movie">
+    <div class="movie-picture" style="background-image: url({{movie.image}});" property="image"></div>
+    <h3 class='movie-title' property="name">
       {{movie.title}}
     </h3>
-    <h3 class='movie-year'>
+    <h3 class='movie-year' property="datePublished">
       Released in {{movie.releaseYear}}
     </h3>
     <h3>
       Plot:
     </h3>
-    <p class='movie-plot'>
+    <p class='movie-plot' property="description">
       {{movie.plot}}
     </p>
-    <div>
+    <div property="aggregateRating" typeof="AggregateRating">
         <h3>
           Ratings:
         </h3>
         <p>
-          1: {{rating.one}}
+          <span property="ratingValue">1</span>: <span property="ratingCount">{{rating.one}}</span>
         </p>
         <p>
-          2: {{rating.two}}
+          <span property="ratingValue">2</span>: <span property="ratingCount">{{rating.two}}</span>
         </p>
         <p>
-          3: {{rating.three}}
+          <span property="ratingValue">3</span>: <span property="ratingCount">{{rating.three}}</span>
         </p>
         <p>
-          4: {{rating.four}}
+          <span property="ratingValue">4</span>: <span property="ratingCount">{{rating.four}}</span>
         </p>
         <p>
-          5: {{rating.five}}
+          <span property="ratingValue">5</span>: <span property="ratingCount">{{rating.five}}</span>
         </p>
     </div>
   </div>
