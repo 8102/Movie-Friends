@@ -1,3 +1,4 @@
+const crypto = require('crypto');
 const Database = require("./Database");
 
 var database = new Database('movie-friends.db');
@@ -14,7 +15,8 @@ module.exports = function token (req, res) {
       res.redirect('/login');
     }
     else {
-      if (req.body.password === user.password) {
+      var hash = crypto.createHash('sha256').update(req.body.password + user.salt).digest('hex');
+      if (hash === user.password) {
         req.session.authenticated = true;
         req.session.userId = user.id;
         name = user.username;

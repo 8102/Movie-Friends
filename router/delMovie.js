@@ -12,7 +12,7 @@ module.exports = function delMovie (req, res) {
 
   database.deleteRating(movieId, userId, function () {
     database.getRatingsFromId(movieId, function (ratings) {
-      if (ratings) {
+      if (!ratings) {
         database.deleteMovie(movieId, function () {
           res.redirect(303, '/users/' + userId);
         });

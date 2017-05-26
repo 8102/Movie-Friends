@@ -1,3 +1,4 @@
+const crypto = require('crypto');
 const Database = require("./Database");
 
 var database = new Database('movie-friends.db');
@@ -15,7 +16,10 @@ module.exports = function registration (req, res) {
 
   database.getUser(req.body.username, function (user) {
     if (user === undefined) {
-      database.addUser(req.body.username, req.body.password);
+      var salt = crypto.randomBytes(32).toString('hex');
+      var hash = crypto.createHash('sha256').update(req.body.password + salt).digest('hex');
+
+      database.addUser(req.body.username, hash, salt);
       req.session.authenticated = true;
       req.session.userId = user.id;
       name = user.username;

@@ -27,12 +27,12 @@ Database.prototype.addRating = function(movieId, rating, userId) {
   });
 };
 
-Database.prototype.addUser = function(username, password) {
+Database.prototype.addUser = function(username, password, salt) {
   console.log("insert user into database");
   var db = this.db;
   db.serialize(function() {
-    var stmt = db.prepare("INSERT INTO users VALUES (NULL,?,?)");
-    stmt.run(username, password);
+    var stmt = db.prepare("INSERT INTO users VALUES (NULL,?,?,?)");
+    stmt.run(username, password, salt);
     stmt.finalize();
   });
 };
@@ -53,28 +53,14 @@ Database.prototype.getMovies = function(callback) {
 
 Database.prototype.getMovie = function(id, callback) {
   console.log("get movie with id: " + id + " from database");
-  var movie = {
-    id: -1,
-    title: "",
-    releaseYear: 0,
-    plot: "",
-    image: ""
-  };
   var db = this.db;
 
   db.get("SELECT id, title, releaseYear, plot, image FROM movies " +
     "WHERE movies.id = (?)", id, function(err, row) {
-      if (!err) {
-        movie.id = row.id;
-        movie.title = row.title;
-        movie.releaseYear = row.releaseYear;
-        movie.plot = row.plot;
-        movie.image = row.image;
-      }
-      else {
+      if (err) {
         console.log(err);
       }
-      callback(movie);
+      callback(row);
     });
 
 };
@@ -113,7 +99,7 @@ Database.prototype.getUser = function(username, callback) {
   console.log("get user with username: " + username + " from database");
   var db = this.db;
 
-  db.get("SELECT username, password, id FROM users WHERE users.username = (?)",
+  db.get("SELECT username, password, id, salt FROM users WHERE users.username = (?)",
    username,
    function(err, row) {
       if (err) {

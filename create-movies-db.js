@@ -12,7 +12,6 @@ db.serialize(function() {
 
   db.run("CREATE TABLE if not exists movies (id INTEGER PRIMARY KEY, releaseYear INT, title TEXT, plot TEXT, image TEXT)");
   db.run("CREATE TABLE if not exists ratings (movieId INT, rating INT, userId INT)");
-  db.run("CREATE TABLE if not exists users (id INTEGER PRIMARY KEY, username TEXT, password TEXT)");
   var stmt = db.prepare("INSERT INTO movies VALUES (?,?,?,?,?)");
   for (var i = 0; i < movies.length; i++) {
     stmt.run(movies[i].id, movies[i].releaseYear, movies[i].title, movies[i].plot, movies[i].image);

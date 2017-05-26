@@ -46,6 +46,20 @@ router.post('/delMovie', require('./delMovie'));
 
 // REST API
 
+// handling movies API.
+router.get('/api/movies', require('./api/movies'));
+
+// handling single movie API.
+router.get('/api/movies/:id', require('./api/movie'));
+
+// handling login API.
+router.post('/api/tokens', require('./api/token'));
+
+// handling ratings API.
+router.post('/api/ratings', require('./api/ratings'));
+
+// handling deleting of ratings API.
+router.delete('/api/ratings', require('./api/delRatings'));
 
 
 // handling unknown route and ouput an error message.
