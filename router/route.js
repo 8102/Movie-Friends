@@ -44,6 +44,9 @@ router.get('/users/:id', require('./user'));
 // handling movie rating page.
 router.post('/delMovie', require('./delMovie'));
 
+// handling friend adding page.
+router.get('/addFriend/:id', require('./addFriend'));
+
 // REST API
 
 // handling movies API.

@@ -20,6 +20,7 @@ db.serialize(function() {
 
   db.run("CREATE TABLE if not exists users (id INTEGER PRIMARY KEY, username TEXT, password TEXT, salt TEXT, firstName TEXT, lastName TEXT, gender TEXT, canSee INT)");
   db.run("CREATE TABLE if not exists roles (userId INT, role INT)");
+  db.run("CREATE TABLE if not exists friends (userIdFirst INT, userIdSecond INT)");
   var stmt = db.prepare("INSERT INTO users VALUES (?,?,?,?,?,?,?,?)");
   var stmtRole = db.prepare("INSERT INTO roles VALUES (?,?)");
   for (var i = 0; i < users.length; i++) {

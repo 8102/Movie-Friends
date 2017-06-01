@@ -49,6 +49,17 @@ Database.prototype.addRole = function(userId, role, callback) {
   });
 };
 
+Database.prototype.addFriend = function(userId, friendId, callback) {
+  console.log("insert friendship into database");
+  var db = this.db;
+  db.serialize(function() {
+    var stmt = db.prepare("INSERT INTO friends VALUES (?,?)");
+    stmt.run(userId, friendId);
+    stmt.finalize();
+    callback();
+  });
+};
+
 Database.prototype.getMovies = function(callback) {
   console.log("get all movies from database");
   var db = this.db;
@@ -185,6 +196,20 @@ Database.prototype.getRoleById = function(userId, callback) {
         callback(row);
       }
     });
+};
+
+Database.prototype.getFriendsById = function(userId, callback) {
+  console.log("get all friends of user " + userId + " from database");
+  var db = this.db;
+
+  db.all("SELECT * FROM friends WHERE userIdFirst = (?) OR userIdSecond = (?)", userId, userId, function(err, row) {
+    if (!err) {
+      callback(row);
+    }
+    else {
+      console.log(err);
+    }
+  });
 };
 
 Database.prototype.deleteRating = function(movieId, userId, callback) {
