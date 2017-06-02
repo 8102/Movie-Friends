@@ -38,6 +38,18 @@
       </ul>
     </nav>
 
+    {{#if session.authenticated}}
+
+      <div>
+        <form action="/logout" method="POST">
+          <button class="" type="submit">
+            Logout
+          </button>
+        </form>
+      </div>
+
+    {{/if}}
+
     {{{body}}}
   </body>
 

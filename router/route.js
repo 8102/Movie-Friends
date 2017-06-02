@@ -47,6 +47,12 @@ router.post('/delMovie', require('./delMovie'));
 // handling friend adding page.
 router.get('/addFriend/:id', require('./addFriend'));
 
+// handling foaf page.
+router.get('/foaf/:id', require('./foaf'));
+
+// handling logout.
+router.post('/logout', require('./logout'));
+
 // REST API
 
 // handling movies API.

@@ -37,6 +37,12 @@
         {{user.username}}
       </p>
     </div>
+    <div>
+      <h3>
+        FOAF:
+      </h3>
+      <a href="/foaf/{{user.id}}" target="_blank">link</a>
+    </div>
     {{# if canAdd}}
       <div>
         <form action="/addFriend/{{user.id}}" method="GET">
