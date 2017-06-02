@@ -8,7 +8,9 @@ module.exports = function registration (req, res) {
   var firstName = req.body.firstName;
   var lastName = req.body.lastName;
   var gender = req.body.gender;
-  var canSee = req.body.canSee;
+  var publicFirst = req.body.publicFirst;
+  var publicSecond = req.body.publicSecond;
+  var publicGender = req.body.publicGender;
 
   if (req.body.password != req.body.passwordVerif) {
     res.redirect('/register');
@@ -19,7 +21,7 @@ module.exports = function registration (req, res) {
       var salt = crypto.randomBytes(32).toString('hex');
       var hash = crypto.createHash('sha256').update(req.body.password + salt).digest('hex');
 
-      database.addUser(username, hash, salt, firstName, lastName, gender, canSee, function () {
+      database.addUser(username, hash, salt, firstName, lastName, gender, publicFirst, publicSecond, publicGender, function () {
         database.getUser(username, function (user) {
           database.addRole(user.id, 1, function () {
             req.session.authenticated = true;

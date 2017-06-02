@@ -17,7 +17,7 @@ module.exports = function foaf (req, res) {
         });
         var userURL = req.get("host") + "/users/" + req.params.id;
 
-        if (user.canSee) {
+        if (user.publicFirst) {
           writer.addTriple(
             {
               subject: userURL,
@@ -25,6 +25,8 @@ module.exports = function foaf (req, res) {
               object: user.firstName
             }
           );
+        }
+        if (user.publicLast) {
           writer.addTriple(
             {
               subject: userURL,
@@ -32,6 +34,8 @@ module.exports = function foaf (req, res) {
               object: user.lastName
             }
           );
+        }
+        if (user.publicGender) {
           writer.addTriple(
             {
               subject: userURL,

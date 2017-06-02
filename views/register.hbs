@@ -2,9 +2,11 @@
   <div class="form">
     <form class="register-form" action="/registration" method="POST">
       <input type="text" name="username" placeholder="username" required/>
+      <input type="checkbox" name="publicFirst"/> My First Name can be public<br>
       <input type="text" name="firstName" placeholder="first name" required/>
+      <input type="checkbox" name="publicLast"/> My Last Name can be public<br>
       <input type="text" name="lastName" placeholder="last name" required/>
-      <input type="checkbox" name="canSee"/> My profile can be public<br>
+      <input type="checkbox" name="publicGender"/> My Gender can be public<br>
       <select name="gender">
         <option value="f">Miss</option>
         <option value="m">Mister</option>

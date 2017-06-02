@@ -27,12 +27,12 @@ Database.prototype.addRating = function(movieId, rating, userId) {
   });
 };
 
-Database.prototype.addUser = function(username, password, salt, firstName, lastName, gender, canSee, callback) {
+Database.prototype.addUser = function(username, password, salt, firstName, lastName, gender, publicFirst, publicLast, publicGender, callback) {
   console.log("insert user into database");
   var db = this.db;
   db.serialize(function() {
-    var stmt = db.prepare("INSERT INTO users VALUES (NULL,?,?,?,?,?,?,?)");
-    stmt.run(username, password, salt, firstName, lastName, gender, canSee);
+    var stmt = db.prepare("INSERT INTO users VALUES (NULL,?,?,?,?,?,?,?,?,?)");
+    stmt.run(username, password, salt, firstName, lastName, gender, publicFirst, publicLast, publicGender);
     stmt.finalize();
     callback();
   });
@@ -122,7 +122,7 @@ Database.prototype.getUser = function(username, callback) {
   console.log("get user with username: " + username + " from database");
   var db = this.db;
 
-  db.get("SELECT username, password, id, salt, firstName, lastName, gender, canSee FROM users WHERE users.username = (?)",
+  db.get("SELECT username, password, id, salt, firstName, lastName, gender, publicFirst, publicLast, publicGender FROM users WHERE users.username = (?)",
    username,
    function(err, row) {
       if (err) {

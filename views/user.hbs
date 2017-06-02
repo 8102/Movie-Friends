@@ -52,7 +52,7 @@
         </form>
       </div>
     {{/if}}
-    {{#if user.canSee}}
+    {{#if user.publicFirst}}
       <div>
         <h3>
           First Name:
@@ -61,6 +61,8 @@
           {{user.firstName}}
         </p>
       </div>
+    {{/if}}
+    {{#if user.publicLast}}
       <div>
         <h3>
           Last Name:
@@ -69,6 +71,8 @@
           {{user.lastName}}
         </p>
       </div>
+    {{/if}}
+    {{#if user.publicGender}}
       <div>
         <h3>
           Gender:
